@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="SPI-Active">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sampling-Based System Identification with Active Exploration for Legged Robot Sim2Real Learning</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+  <meta property="og:site_name" content="SPI-Active" />
+  <meta property="og:title" content="SPI-Active" />
+  <meta property="og:image:width" content="1280" />
+  <meta property="og:image:height" content="720" />
+
+  <meta property="article:publisher" content="" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="SPI-Active" />
+</head>
+
+
+<body>
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">Sampling-Based System Identification with Active Exploration for Legged Robot Sim2Real Learning </h1>
+            
+            <div class="is-size-4 publication-authors">
+              <span class="author-block" style="font-size: 95%;">
+                <a href="https://nike353.github.io/">Nikhil Sobanbabu*</a>&nbsp;&nbsp;
+                <a href="https://guanqihe.github.io/">Guanqi He*</a>&nbsp;&nbsp;
+                <a href="https://tairanhe.com/">Tairan He</a>&nbsp;&nbsp;
+                <a href="https://yxyang.github.io/">Yuxiang Yang</a>&nbsp;&nbsp;
+                <a href="https://www.gshi.me/">Guanya Shi</a>&nbsp;&nbsp;
+              </span>
+            </div>
+            <!-- <div class="is-size-3 publication-authors"> -->
+              <!-- make a Italic font -->
+              <!-- <i style="color:rgb(0, 0, 0);">Conference on Robot Learning (CoRL) 2025</i> &nbsp;&nbsp; -->
+            <!-- </div> -->
+            <div class="column">
+              <image src="./static/images/ip.png" style="width: 60%;"></image>
+            </div>
+            <!-- <div class="is-size-4 publication-authors">
+              <b style="color:rgb(255, 100, 100);">Best Systems Paper Award Finalist (top 3)</b>
+            </div> -->
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- PDF Link. -->
+                <span class="link-block">
+                  <a href="./static/pdf/spi_active.pdf"
+                     class="external-link button is-normal is-rounded is-dark" target="_blank">
+                    <span class="icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+                <!-- arXiv Link. -->
+               <span class="link-block">
+                  <a href=""
+                     class="external-link button is-normal is-rounded is-dark" target="_blank">
+                    <span class="icon">
+                        <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>ArXiv</span>
+                  </a>
+                </span>
+                <!-- add twitter link -->
+                <span class="link-block">
+                  <a href=""
+                     class="external-link button is-normal is-rounded is-dark" target="_blank">
+                    <span class="icon">
+                        <i class="fab fa-twitter"></i>
+                    </span>
+                    <span>Summary</span>
+                  </a>
+                </span>
+                <!-- Video Link. -->
+               <span class="link-block">
+                  <a href=""
+                     class="external-link button is-normal is-rounded is-dark" target="_blank">
+                    <span class="icon">
+                        <i class="fab fa-youtube"></i>
+                    </span>
+                    <span>Video</span>
+                  </a>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- <section class="section"> -->
+    <!-- add video -->
+     <!-- <div class="container is-max-desktop">
+        <video controls autoplay loop muted playsinline 
+          src="./static/videos/teaser.mp4" poster="./resources/loading-icon.gif" 
+          style="border: 1px solid #bbb; border-radius: 10px; margin: 1.0%;"
+          type="video/mp4">
+        </video>
+    </div>
+  </section> -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-12">
+          <h2 class="title is-2">Abstract</h2>
+          <div class="content has-text-justified">
+            <p> Sim-to-real discrepancies hinder learning-based policies from achieving high-precision tasks in the real world. 
+              While Domain Randomization (DR) is commonly used to bridge this gap, 
+              it often relies on heuristics and can lead to overly conservative policies with degrading performance when not properly tuned. 
+              System Identification (Sys-ID) offers a targeted approach, but standard techniques rely on differentiable dynamics and/or direct torque measurement, 
+              assumptions that rarely hold for contact-rich legged systems. To this end, we present Sampling-based Parameter Identification with Active Exploration (SPI-Active),
+              a two-stage framework that estimates physical parameters of legged robots to minimize the sim-to-real gap. 
+              SPI-Active robustly identifies key physical parameters through massive parallel sampling, 
+              minimizing state prediction errors between simulated and real-world trajectories. 
+              To further improve the informativeness of collected data, 
+              we introduce an active exploration strategy that maximizes the Fisher Information of the collected real-world trajectories via optimizing the input commands of an exploration policy. 
+              This targeted exploration leads to accurate identification and better generalization across diverse tasks. 
+              Experimental results demonstrate that SPI-Active enables precise sim-to-real transfer of learned policies to the real world, 
+              outperforming baselines by 42-63% in various locomotion tasks.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!--/ Abstract. -->
+  
+  
+  </section>
+  
+  <section class="section">
+    <div class="container">
+      <h2 class="title is-2" style="text-align: center;">Method</h2>
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-two-thirds">
+          <div class="content has-text-justified">
+            <p>
+              <span class="method" style="color: green;">SPI-Active</span> is a two-stage framework that estimates physical parameters of legged robots to minimize the sim-to-real gap. It involves data collection of real-world trajectories using RL policies or motion priors and subsequently estimating the desired parameters using sampling-based optimization. Further, the stage 1 parameters are refined by optimizing input commands of a multi-behavioral policy to maximize Fisher Information and gather informative data. Training with identified parameters from <span class="method" style="color: green;">SPI-Active</span> leads to improved sim-to-real transfer in downstream tasks.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- <h2 class="title is-4" style="text-align: center;">Training Framework</h2> -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-three-thirds">
+          <div class="content has-text-justified">
+            <!-- <ol type="a">
+              There are two steps within the <span class="method" style="color: darkred;">FALCON</span> framework:
+                <ol>
+                  <li><strong>Two-Agent Joint Training with Whole-Body Proprioception</strong>:  <br>Two agents, each assigned distinct sub-tasks, are jointly trained using shared whole-body proprioception signals. During training, randomized 3D external forces—bounded by the upper-body joint torque limits—are applied to the end-effectors to encourage robust coordination;</li>
+                  <li><strong>External Disturbance Handling via Force Perturbation</strong><br> The agents learn to maintain task performance under force perturbations, developing complementary behaviors to counteract disturbances and achieve stable loco-manipulation.</li>
+                </ol> -->
+          </div>
+        </div>
+      </div>
+      
+      <div class="columns is-centered">
+        <div class="column is-two-thirds has-text-centered">
+          <img src="./static/images/pipeline.png" alt="" style="width: 100%;" />
+        </div>
+      </div>
+  
+  
+
+<!-- <h2 class="title is-2" style="text-align: center;">Experiment Results</h2> -->
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-2" style="text-align: center; padding-bottom: 10px;">
+          Performance in Sim-to-real Locomotion Tasks
+        </h2>
+        <p class="content is-medium" style="text-align: center; padding-bottom: 20px;">
+          We compare the real-world performance of <strong style="color: green; font-weight: 800;">SPI-Active</strong> with <strong style="color: #e63946; font-weight: 800;">Vanilla</strong> baseline on the following tasks: <b>Forward Jump</b>, <b>Yaw Jump</b>, <b>Velocity Tracking</b>and <b>Attitude Tracking</b>.
+        </p>        
+        <tr>
+          <td>
+            <div class="columns"> 
+              <div class="column">
+                <h3 class="title is-3" style="text-align: center; margin-bottom: 10px; font-size: x-large;">Forward Jump (Vanilla)</h3>
+                <video autoplay muted loop playsinline controls preload="auto" src="./static/videos/fj_vanilla.mp4" width="100%" style="border-radius:10px; border: 5px solid rgb(236, 136, 134);"></video>
+              </div>
+              <div class="column">
+                <h3 class="title is-3" style="text-align: center; margin-bottom: 10px; font-size: x-large;">Forward Jump (SPI-Active)</h3>
+                <video autoplay muted loop playsinline controls preload="auto" src="./static/videos/fj_spi-active.mp4" width="100%" style="border-radius:10px; border: 5px solid rgb(56, 182, 60);"></video>
+              </div>
+            </div>
+            <div class="columns">
+              <div class="column" style="text-align: center;">
+                <h3 class="title is-3" style="margin-bottom: 10px; font-size: x-large;">Yaw Jump (vanilla)</h3>
+                <video autoplay muted loop playsinline controls preload="auto"
+                      src="./static/videos/yj_vanilla.mp4"
+                      width="100%"
+                      style="border-radius:10px; border: 5px solid rgb(236, 136, 134);">
+                </video>
+              </div>
+              <div class="column" style="text-align: center;">
+                <h3 class="title is-3" style="margin-bottom: 10px; font-size: x-large;">Yaw Jump (SPI-Active)</h3>
+                <video autoplay muted loop playsinline controls preload="auto"
+                      src="./static/videos/yj_spi-active.mp4"
+                      width="100%"
+                      style="border-radius:10px; border: 5px solid rgb(56, 182, 60);">
+                </video>
+              </div>
+            </div>
+            <br>
+
+            <div class="columns is-desktop">
+              <!-- Column 1: Two vertically stacked videos -->
+              <div class="column">
+                <h3 class="title is-4" style="text-align: center;">Velocity Tracking (Vanilla)</h3>
+                <video class="sync-group-1" autoplay muted loop playsinline controls preload="auto" 
+                       src="./static/videos/vt_vanilla.mp4" 
+                       width="100%" style="border-radius:10px; border: 5px solid rgb(255, 114, 112); margin-bottom: 10px;"></video>
+            
+                <!-- <h3 class="title is-4" style="text-align: center;">Task B (Baseline)</h3> -->
+                <!-- Second video: 80% width, centered -->
+                <div style="display: flex; justify-content: center;">
+                  <video class="sync-group-2" autoplay muted loop playsinline controls preload="auto" 
+                         src="./static/videos/vt_vanilla_anim.mp4" 
+                         width="60%" 
+                         style="border-radius:10px; border: 5px solid rgb(255, 114, 112);">
+                  </video>
+                </div>
+              </div>
+            
+              <!-- Column 2: Two vertically stacked videos -->
+              <div class="column">
+                <h3 class="title is-4" style="text-align: center;">Velocity Tracking (SPI-Active)</h3>
+                
+                <!-- First video: full width -->
+                <video class="sync-group-2" autoplay muted loop playsinline controls preload="auto" 
+                       src="./static/videos/vt_spi-active.mp4" 
+                       width="100%" 
+                       style="border-radius:10px; border: 5px solid rgb(134, 236, 137); margin-bottom: 10px;">
+                </video>
+              
+                <!-- Second video: 80% width, centered -->
+                <div style="display: flex; justify-content: center;">
+                  <video class="sync-group-2" autoplay muted loop playsinline controls preload="auto" 
+                         src="./static/videos/vt_spi-active_anim.mp4" 
+                         width="60%" 
+                         style="border-radius:10px; border: 5px solid rgb(134, 236, 137);">
+                  </video>
+                </div>
+              </div>
+              
+            </div>
+
+            <div class="columns is-desktop">
+              <!-- Column 1: Two vertically stacked videos -->
+              <div class="column">
+                <h3 class="title is-4" style="text-align: center;">Attitude Tracking (Vanilla)</h3>
+                <video class="sync-group-1" autoplay muted loop playsinline controls preload="auto" 
+                       src="./static/videos/rp_vanilla.mp4" 
+                       width="100%" style="border-radius:10px; border: 5px solid rgb(255, 114, 112); margin-bottom: 10px;"></video>
+            
+                <!-- <h3 class="title is-4" style="text-align: center;">Task B (Baseline)</h3> -->
+                <div style="display: flex; justify-content: center;">
+                  <video class="sync-group-2" autoplay muted loop playsinline controls preload="auto" 
+                         src="./static/videos/rp_vanilla (online-video-cutter.com).mp4" 
+                         width="80%" 
+                         style="border-radius:10px; border: 5px solid rgb(255, 114, 112);">
+                  </video>
+                </div>
+              </div>
+            
+              <!-- Column 2: Two vertically stacked videos -->
+              <div class="column">
+                <h3 class="title is-4" style="text-align: center;">Attitude Tracking (SPI-Active)</h3>
+                <video class="sync-group-2" autoplay muted loop playsinline controls preload="auto" 
+                       src="./static/videos/rp_spi-active.mp4" 
+                       width="100%" style="border-radius:10px; border: 5px solid rgb(134, 236, 137); margin-bottom: 10px;"></video>
+            
+                <!-- <h3 class="title is-4" style="text-align: center;">Task B (FALCON)</h3> -->
+                <div style="display: flex; justify-content: center;">
+                  <video class="sync-group-2" autoplay muted loop playsinline controls preload="auto" 
+                         src="./static/videos/rp_spi-active (online-video-cutter.com) (1).mp4" 
+                         width="80%" 
+                         style="border-radius:10px; border: 5px solid rgb(134, 236, 137);">
+                  </video>
+                </div>
+              </div>
+            </div>
+            
+
+
+          </td>
+        </tr>
+      </div> 
+
+      
+    </div>
+  </div>
+</section>
+
+
+
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-2" style="text-align: center; padding-bottom: 10px;">
+          Generalization to Humanoids 
+        </h2>
+            
+        <tr>
+          <td>
+            <div class="columns"> 
+              <div class="column">
+                <h3 class="title is-3" style="text-align: center; margin-bottom: 10px; font-size: x-large;">Velocity Tracking (Vanilla)</h3>
+                <div style="display: flex; justify-content: center;">
+                  <video autoplay muted loop playsinline controls preload="auto" src="./static/videos/vanilla.mp4" width="60%" style="border-radius:10px; border: 5px solid rgb(236, 136, 134);"></video>
+                </div>
+              </div>
+              <div class="column">
+                <h3 class="title is-3" style="text-align: center; margin-bottom: 10px; font-size: x-large;">Velocity Tracking (SPI-Active)</h3>
+                <div style="display: flex; justify-content: center;">
+                  <video autoplay muted loop playsinline controls preload="auto" src="./static/videos/spi-active.mp4" width="60%" style="border-radius:10px; border: 5px solid rgb(56, 182, 60);"></video>
+                </div>
+              </div>
+            </div>
+            
+      
+          </td>
+        </tr>
+      </div> 
+      
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-2" style="text-align: center; padding-bottom: 10px;">
+          Data Collection with Active Exploration
+        </h2>
+        <!-- <p class="content is-medium" style="text-align: center; padding-bottom: 20px;">
+          Accurate parameter identification using <strong style="color: green; font-weight: 800;">SPI-Active</strong> enables the quadruped to perform high-speed open-loop navigation across narrow poles.        
+        </p>       -->
+        <tr>
+          <td>
+            <div class="columns is-vcentered">
+              <!-- Left: Centered video -->
+              <div class="column is-half" style="display: flex; justify-content: center; align-items: center;">
+                <video autoplay muted loop playsinline controls preload="auto"
+                       src="./static/videos/active exploration.mp4"
+                       style="border-radius:10px; border: 5px solid rgb(56, 182, 60); width: 100%; max-width: 640px; height: auto;">
+                </video>
+              </div>
+            
+              <!-- Right: Two plots, no white spacing -->
+              <div class="column is-half" style="display: flex; flex-direction: column; justify-content: space-between;">
+                <img src="./static/images/velocity_variation.png"
+                     alt="Velocity Commands Plot"
+                     style="width: 100%; height: 350px; object-fit: contain; margin-bottom: 10px; border-radius: 10px;" />
+            
+                <img src="./static/images/gait_variation.png"
+                     alt="Gait Variation Plot"
+                     style="width: 100%; height: 220px; object-fit: contain; border-radius: 10px;" />
+              </div>
+            </div>
+            
+            
+            
+      
+          </td>
+        </tr>
+      </div> 
+      
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+<section class="section" id="BibTeX">
+  <div class="container content">
+    <h2 class="titile">BibTeX</h2>
+    <pre><code></code></pre>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <p>Page template borrowed from <a href="https://nerfies.github.io/"><span class="dnerf">Nerfies</span></a>.</p>
+    </div>
+  </div>
+</footer>
+
+
+
+
+
+<!-- <section class="section">
+  <div class="container">
+    <h2 class="title is-2" style="text-align: center;" id="press-coverage">Media</h2>
+    <br>
+    <div class="columns is-centered">
+      <div class="column is-centered has-text-centered">
+        <a target="_blank" href="https://spectrum.ieee.org/video-friday-unitree-talks-robots">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/7/7d/IEEE-Spectrum.svg" width="70%"></img>
+        </a>
+      </div>
+  </div>
+</section> -->
+
+
+
+</body>
+</html>
